@@ -58,3 +58,36 @@ export function generateSeo(
       openGraph: og,
     };
   }
+
+  export async function getBlogCategoryLinks(): Promise<CategoryLink[]> {
+    return await createClient()
+      .getContentByType({
+        contentType: "blog_category",
+        sortBy: "name",
+        sortDirection: "asc",
+        limit: 10,
+      })
+      .then((response) => {
+        return response.content.map((content) => ({
+          label: content.name,
+          href: "/" + content.uri,
+        }));
+      })
+      .catch(() => {
+        return [];
+      });
+  }
+  
+  
+  export async function getBlogPosts(): Promise<ContentData[]> {
+    return await createClient()
+    .getContentByType({
+      contentType: "blog_post",
+    })
+    .then((response) => {
+      return response.content
+    })
+    .catch(() => {
+      return [];
+    });
+  }
