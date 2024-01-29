@@ -1,29 +1,31 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ContentData } from "@gocontento/client";
+import { formatDate } from "@/utils/formatDate";
 
 export default function BlogCard({ post }: { post: ContentData }) {
   return (
-    <div>
+    <div className="prose">
       <div>
         <Image
           src={post.fields.image.assets[0].asset.url}
           alt={post.fields.image.assets[0].asset.description}
           width={300}
           height={300}
+          className="w-full"
         />
       </div>
       <div>
-        <h3>{post.fields.title.text}</h3>
+        <p className="text-sm font-semibold">{formatDate(post.published_at)}</p>
+        <h3 className="text-3xl font-semibold mt-0">
+          {post.fields.title.text}
+        </h3>
         <p>{post.fields.excerpt.text}</p>
         <Link
-          href={post.fields.button.blocks[0].button_url.text}
-          className="text-black inline-block my-5 hover:opacity-80 not-prose"
-          target={
-            post.fields.button.blocks[0].open_in_new_tab.is_on ? "_blank" : ""
-          }
+          href={`/${post.uri}`}
+          className="text-black font-semibold hover:opacity-80 inline-block my-5 hover:opacity-80 not-prose"
         >
-          {post.fields.button.blocks[0].button_text.text}
+          Read More
         </Link>
       </div>
     </div>
