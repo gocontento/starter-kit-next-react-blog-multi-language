@@ -14,7 +14,7 @@ In your Contento Account Settings create a new API Key for this site.
 In your Contento CMS starter kit site, in the Content panel:
 - Add new Main Nav
 - Add new Footer Nav
-- Add new General Page
+- Add new General Page and Hero Block
 
 Rename the .env.sample file to .env and copy and paste your unique ID's from Contento into the corresponding secrets. For more information about where to find each ID check out this guide: (https://www.contento.io/developer-resources/starter-kits/ids)
 
