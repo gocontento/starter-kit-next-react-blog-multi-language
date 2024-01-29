@@ -33,7 +33,7 @@ export default function BlogPost({
           </h1>
           <p className="text-lg pb-5">{content.fields.excerpt.text}</p>
           <Link
-            href={category.slug}
+            href={`/blog/category/${category.slug}`}
             className="w-max rounded-3xl bg-black px-4 py-2 flex items-center hover:opacity-80"
           >
             <span className="text-xs font-semibold uppercase text-white">
