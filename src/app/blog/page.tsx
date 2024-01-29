@@ -8,13 +8,14 @@ import {
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogIndexPage from "@/components/pages/BlogIndexPage";
+import { ContentData } from "@gocontento/client";
 
 const client = createClient();
 
 export async function generateMetadata(): Promise<Metadata> {
   return await client
     .getContentBySlug("blog", "blog_landing")
-    .then((content) => {
+    .then((content: ContentData) => {
       return generateSeo(content);
     })
     .catch(() => {
