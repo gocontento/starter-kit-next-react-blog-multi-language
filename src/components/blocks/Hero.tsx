@@ -26,8 +26,8 @@ export default function Hero({ block }: { block: BlockData }) {
             src={block.fields.image.assets[0].asset.url}
             alt={block.fields.image.assets[0].asset.description}
             className="h-full w-full object-cover"
-            width={176}
-            height={176}
+            width={750}
+            height={600}
           />
         </div>
       </div>
