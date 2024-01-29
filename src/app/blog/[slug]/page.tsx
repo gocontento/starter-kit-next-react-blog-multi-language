@@ -1,8 +1,13 @@
 import { draftMode } from "next/headers";
-import { createClient, generateSeo } from "@/lib/contento";
+import {
+  createClient,
+  generateSeo,
+  getBlogCategoryLinks,
+} from "@/lib/contento";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPostPage from "@/components/pages/BlogPostPage";
+import { ContentAPIResponse, ContentData } from "@gocontento/client";
 
 const client = createClient();
 
@@ -18,7 +23,7 @@ export async function generateStaticParams() {
       contentType: "blog_post",
       limit: 100,
     })
-    .then((response) => {
+    .then((response: ContentAPIResponse) => {
       return response.content.map((content) => ({
         slug: content.slug,
       }));
@@ -31,7 +36,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return await client
     .getContentBySlug(params.slug, "blog_post")
-    .then((content) => {
+    .then((content: ContentData) => {
       return generateSeo(content, {
         type: "article",
         publishedTime: content.published_at ?? undefined,

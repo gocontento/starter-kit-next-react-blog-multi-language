@@ -3,8 +3,8 @@
 import { ContentData } from "@gocontento/client";
 import { useLivePreview } from "@gocontento/next";
 import { formatDate } from "@/utils/formatDate";
-import Link from "next/link";
 import Image from "next/image";
+import CategoryPill from "../blocks/blog/CategoryPill";
 
 export default function BlogPost({
   initialContent,
@@ -13,6 +13,7 @@ export default function BlogPost({
 }) {
   const { content } = useLivePreview({ content: initialContent });
   const category = content.fields.category.content_links[0].content_link;
+  console.log(content);
 
   return (
     <div>
@@ -32,14 +33,8 @@ export default function BlogPost({
             {content.fields.title.text}
           </h1>
           <p className="text-lg pb-5">{content.fields.excerpt.text}</p>
-          <Link
-            href={`/blog/category/${category.slug}`}
-            className="w-max rounded-3xl bg-black px-4 py-2 flex items-center hover:opacity-80"
-          >
-            <span className="text-xs font-semibold uppercase text-white">
-              {category.name}
-            </span>
-          </Link>
+          {/* TO DO - FIX THIS PILL */}
+          <CategoryPill category={category} />
         </div>
       </div>
       <div className="px-4 sm:px-6 md:px-28 py-9 md:py-16 flex flex-col items-center">

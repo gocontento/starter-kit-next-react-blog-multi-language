@@ -4,7 +4,7 @@ import { useLivePreview } from "@gocontento/next";
 import { ContentData } from "@gocontento/client/lib/types";
 import { CategoryLink } from "@/types";
 import BlogCard from "../blocks/blog/BlogCard";
-import CategoryPills from "../blocks/blog/CategoryPills";
+import CategoryPill from "../blocks/blog/CategoryPill";
 
 export default function BlogCategory({
   initialContent,
@@ -23,7 +23,11 @@ export default function BlogCategory({
         <h1 className="text-4xl font-semibold md:text-5xl">
           {content.fields.title.text}
         </h1>
-        <CategoryPills categoryLinks={categoryLinks} />
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-4 my-7">
+          {categoryLinks.map((category) => (
+            <CategoryPill category={category} />
+          ))}
+        </div>
       </div>
       <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-3">
         {posts.map((post, index) => (
