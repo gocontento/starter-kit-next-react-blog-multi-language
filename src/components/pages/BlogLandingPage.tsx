@@ -2,23 +2,19 @@
 
 import { ContentData } from "@gocontento/client";
 import { useLivePreview } from "@gocontento/next";
-import { CategoryLink } from "@/types";
 import BlogCard from "../blocks/blog/BlogCard";
-import CategoryPills from "../blocks/blog/CategoryPill";
 import CategoryPill from "../blocks/blog/CategoryPill";
 
-export default function BlogIndexPage({
+export default function BlogLandingPage({
   initialContent,
   posts,
   categoryLinks,
 }: {
   initialContent: ContentData;
   posts: ContentData[];
-  categoryLinks: CategoryLink[];
+  categoryLinks: ContentData[];
 }) {
   const { content } = useLivePreview({ content: initialContent });
-
-  console.log(categoryLinks);
 
   return (
     <div className="mx-auto px-4 sm:px-6 md:px-28 py-9 md:py-16">

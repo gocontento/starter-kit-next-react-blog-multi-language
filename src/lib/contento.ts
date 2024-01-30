@@ -1,4 +1,4 @@
-import { ContentData } from "@gocontento/client";
+import { ContentAPIResponse, ContentData } from "@gocontento/client";
 import { Client } from "@gocontento/next";
 import { Metadata } from "next";
 import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
@@ -59,7 +59,7 @@ export function generateSeo(
     };
   }
 
-  export async function getBlogCategoryLinks(): Promise<CategoryLink[]> {
+  export async function getBlogCategoryLinks(): Promise<ContentData[]> {
     return await createClient()
       .getContentByType({
         contentType: "blog_category",
@@ -67,12 +67,9 @@ export function generateSeo(
         sortDirection: "asc",
         limit: 10,
       })
-      .then((response) => {
-        return response.content.map((content) => ({
-          label: content.name,
-          href: "/" + content.uri,
-        }));
-      })
+      .then((response: ContentAPIResponse) => {
+        return response.content
+        })
       .catch(() => {
         return [];
       });
@@ -84,7 +81,7 @@ export function generateSeo(
     .getContentByType({
       contentType: "blog_post",
     })
-    .then((response) => {
+    .then((response: ContentAPIResponse) => {
       return response.content
     })
     .catch(() => {

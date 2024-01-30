@@ -1,9 +1,5 @@
 import { draftMode } from "next/headers";
-import {
-  createClient,
-  generateSeo,
-  getBlogCategoryLinks,
-} from "@/lib/contento";
+import { createClient, generateSeo } from "@/lib/contento";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPostPage from "@/components/pages/BlogPostPage";

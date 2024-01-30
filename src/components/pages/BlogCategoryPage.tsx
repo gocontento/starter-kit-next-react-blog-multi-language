@@ -2,7 +2,6 @@
 
 import { useLivePreview } from "@gocontento/next";
 import { ContentData } from "@gocontento/client/lib/types";
-import { CategoryLink } from "@/types";
 import BlogCard from "../blocks/blog/BlogCard";
 import CategoryPill from "../blocks/blog/CategoryPill";
 
@@ -13,7 +12,7 @@ export default function BlogCategory({
 }: {
   initialContent: ContentData;
   posts: ContentData[];
-  categoryLinks: CategoryLink[];
+  categoryLinks: ContentData[];
 }) {
   const { content } = useLivePreview({ content: initialContent });
 
