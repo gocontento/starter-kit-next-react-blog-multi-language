@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function LinkedInIcon({ href }: { href: string }) {
   return (
-    <Link href={href} className="hover:opacity-80">
+    <Link href={href} className="hover:opacity-80" target="_blank">
       <span className="sr-only">LinkedIn</span>
       <svg
         className="h-5 w-5"

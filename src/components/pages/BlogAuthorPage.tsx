@@ -34,14 +34,9 @@ export default function BlogAuthor({
         </h1>
         <p className="text-lg font-semibold mb-1">{content.fields.role.text}</p>
         <p className="text-lg">{content.fields.bio.text}</p>
-        <div className="flex space-x-3 my-3">
+        <div className="flex space-x-3 mt-5">
           <TwitterIcon href={content.fields.twitter.text} />{" "}
           <LinkedInIcon href={content.fields.linked_in.text} />
-        </div>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-4 my-7">
-          {categoryLinks.map((category, index) => (
-            <CategoryPill key={`blog-category-${index}`} category={category} />
-          ))}
         </div>
         <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-3">
           {posts.map((post, index) => (
