@@ -7,7 +7,7 @@ import {
 } from "@/lib/contento";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import BlogIndexPage from "@/components/pages/BlogLandingPage";
+import BlogLandingPage from "@/components/pages/BlogLandingPage";
 import { ContentData } from "@gocontento/client";
 
 const client = createClient();
@@ -35,7 +35,7 @@ export default async function page() {
   const categoryLinks = await getBlogCategoryLinks();
 
   return (
-    <BlogIndexPage
+    <BlogLandingPage
       initialContent={content}
       posts={posts}
       categoryLinks={categoryLinks}
