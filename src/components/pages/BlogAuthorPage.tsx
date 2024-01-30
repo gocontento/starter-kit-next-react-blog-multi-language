@@ -35,7 +35,7 @@ export default function BlogAuthor({
         <p className="text-lg font-semibold mb-1">{content.fields.role.text}</p>
         <p className="text-lg">{content.fields.bio.text}</p>
         <div className="flex space-x-3 mt-5">
-          <TwitterIcon href={content.fields.twitter.text} />{" "}
+          <TwitterIcon href={content.fields.twitter.text} />
           <LinkedInIcon href={content.fields.linked_in.text} />
         </div>
         <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-3">
