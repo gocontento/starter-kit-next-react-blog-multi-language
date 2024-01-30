@@ -27,8 +27,8 @@ export default function BlogLandingPage({
           className="text-lg"
         />
         <div className="flex flex-wrap items-center gap-x-3 gap-y-4 my-7">
-          {categoryLinks.map((category) => (
-            <CategoryPill category={category} />
+          {categoryLinks.map((category, index) => (
+            <CategoryPill key={`blog-category-${index}`} category={category} />
           ))}
         </div>
       </div>

@@ -13,7 +13,6 @@ export default function BlogPost({
 }) {
   const { content } = useLivePreview({ content: initialContent });
   const category = content.fields.category.content_links[0].content_link;
-  console.log(content);
 
   return (
     <div>
@@ -33,7 +32,6 @@ export default function BlogPost({
             {content.fields.title.text}
           </h1>
           <p className="text-lg pb-5">{content.fields.excerpt.text}</p>
-          {/* TO DO - FIX THIS PILL */}
           <CategoryPill category={category} />
         </div>
       </div>
