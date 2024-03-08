@@ -1,57 +1,57 @@
-import { draftMode } from "next/headers";
-import { createClient, generateSeo } from "@/lib/contento";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import BlogPostPage from "@/components/pages/BlogPostPage";
-import { ContentAPIResponse, ContentData } from "@gocontento/client";
+import { draftMode } from 'next/headers'
+import { createClient, generateSeo } from '@/lib/contento'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import BlogPostPage from '@/components/pages/BlogPostPage'
+import { ContentAPIResponse, ContentData } from '@gocontento/client'
 
-const client = createClient();
+const client = createClient()
 
 type Props = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export async function generateStaticParams() {
   return await client
     .getContentByType({
-      contentType: "blog_post",
+      contentType: 'blog_post',
       limit: 100,
     })
     .then((response: ContentAPIResponse) => {
       return response.content.map((content) => ({
         slug: content.slug,
-      }));
+      }))
     })
     .catch(() => {
-      return [];
-    });
+      return []
+    })
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return await client
-    .getContentBySlug(params.slug, "blog_post")
+    .getContentBySlug(params.slug, 'blog_post')
     .then((content: ContentData) => {
       return generateSeo(content, {
-        type: "article",
+        type: 'article',
         publishedTime: content.published_at ?? undefined,
         modifiedTime: content.updated_at,
         authors: content.fields.author.content_links[0].content_link.url,
         section: content.fields.category.content_links[0].content_link.name,
-      });
+      })
     })
     .catch(() => {
-      return {};
-    });
+      return {}
+    })
 }
 
 export default async function page({ params }: Props) {
   const post = await createClient(draftMode().isEnabled)
-    .getContentBySlug(params.slug, "blog_post")
+    .getContentBySlug(params.slug, 'blog_post')
     .catch(() => {
-      notFound();
-    });
+      notFound()
+    })
 
-  return <BlogPostPage initialContent={post} />;
+  return <BlogPostPage initialContent={post} />
 }

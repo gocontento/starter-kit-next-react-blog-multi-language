@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link'
 
 export default function LinkedInIcon({ href }: { href: string }) {
   return (
@@ -17,5 +17,5 @@ export default function LinkedInIcon({ href }: { href: string }) {
         ></path>
       </svg>
     </Link>
-  );
+  )
 }

@@ -1,72 +1,68 @@
-import { draftMode } from "next/headers";
-import {
-  createClient,
-  generateSeo,
-  getBlogCategoryLinks,
-} from "@/lib/contento";
-import { notFound } from "next/navigation";
-import { Metadata } from "next";
-import { ContentAPIResponse, ContentData } from "@gocontento/client";
-import BlogAuthorPage from "@/components/pages/BlogAuthorPage";
+import { draftMode } from 'next/headers'
+import { createClient, generateSeo, getBlogCategoryLinks } from '@/lib/contento'
+import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
+import { ContentAPIResponse, ContentData } from '@gocontento/client'
+import BlogAuthorPage from '@/components/pages/BlogAuthorPage'
 
-const client = createClient();
+const client = createClient()
 
 type Props = {
   params: {
-    slug: string;
-  };
-};
+    slug: string
+  }
+}
 
 export async function generateStaticParams() {
   return await client
     .getContentByType({
-      contentType: "authors",
+      contentType: 'authors',
       limit: 100,
     })
     .then((response: ContentAPIResponse) => {
       return response.content.map((content) => ({
         slug: content.slug,
-      }));
+      }))
     })
     .catch(() => {
-      return [];
-    });
+      return []
+    })
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return await client
-    .getContentBySlug(params.slug, "authors")
+    .getContentBySlug(params.slug, 'authors')
     .then((content: ContentData) => {
-      const nameParts = content.fields.name.text.split(" ");
+      const nameParts = content.fields.name.text.split(' ')
 
       return generateSeo(content, {
-        type: "profile",
+        type: 'profile',
         firstName: nameParts.length ? nameParts[0] : content.fields.name.text,
         lastName: nameParts.length >= 2 ? nameParts[1] : null,
-      });
+      })
     })
     .catch(() => {
-      return {};
-    });
+      return {}
+    })
 }
 
 export default async function page({ params }: Props) {
   const content = await createClient(draftMode().isEnabled)
-    .getContentBySlug(params.slug, "authors")
+    .getContentBySlug(params.slug, 'authors')
     .catch(() => {
-      notFound();
-    });
+      notFound()
+    })
 
   const postsResponse = await client.getContent({
     params: {
-      content_type: "blog_post",
-      limit: "100",
-      "fields[content_links][author][slug]": params.slug,
+      content_type: 'blog_post',
+      limit: '100',
+      'fields[content_links][author][slug]': params.slug,
     },
-  });
+  })
 
-  const posts = postsResponse.content;
-  const categoryLinks = await getBlogCategoryLinks();
+  const posts = postsResponse.content
+  const categoryLinks = await getBlogCategoryLinks()
 
   return (
     <BlogAuthorPage
@@ -74,5 +70,5 @@ export default async function page({ params }: Props) {
       posts={posts}
       categoryLinks={categoryLinks}
     />
-  );
+  )
 }

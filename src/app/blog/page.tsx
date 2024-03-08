@@ -1,38 +1,38 @@
-import { draftMode } from "next/headers";
+import { draftMode } from 'next/headers'
 import {
   createClient,
   generateSeo,
   getBlogCategoryLinks,
   getBlogPosts,
-} from "@/lib/contento";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import BlogLandingPage from "@/components/pages/BlogLandingPage";
-import { ContentData } from "@gocontento/client";
+} from '@/lib/contento'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import BlogLandingPage from '@/components/pages/BlogLandingPage'
+import { ContentData } from '@gocontento/client'
 
-const client = createClient();
+const client = createClient()
 
 export async function generateMetadata(): Promise<Metadata> {
   return await client
-    .getContentBySlug("blog", "blog_landing")
+    .getContentBySlug('blog', 'blog_landing')
     .then((content: ContentData) => {
-      return generateSeo(content);
+      return generateSeo(content)
     })
     .catch(() => {
-      return {};
-    });
+      return {}
+    })
 }
 
 export default async function page() {
   const content = await createClient(draftMode().isEnabled)
-    .getContentBySlug("blog", "blog_landing")
+    .getContentBySlug('blog', 'blog_landing')
     .catch(() => {
-      notFound();
-    });
+      notFound()
+    })
 
-  const posts = await getBlogPosts();
+  const posts = await getBlogPosts()
 
-  const categoryLinks = await getBlogCategoryLinks();
+  const categoryLinks = await getBlogCategoryLinks()
 
   return (
     <BlogLandingPage
@@ -40,5 +40,5 @@ export default async function page() {
       posts={posts}
       categoryLinks={categoryLinks}
     />
-  );
+  )
 }

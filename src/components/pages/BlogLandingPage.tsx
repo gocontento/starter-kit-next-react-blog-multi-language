@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import { ContentData } from "@gocontento/client";
-import { useLivePreview } from "@gocontento/next";
-import BlogCard from "../blocks/blog/BlogCard";
-import CategoryPill from "../blocks/blog/CategoryPill";
+import { ContentData } from '@gocontento/client'
+import { useLivePreview } from '@gocontento/next'
+import BlogCard from '../blocks/blog/BlogCard'
+import CategoryPill from '../blocks/blog/CategoryPill'
 
 export default function BlogLandingPage({
   initialContent,
   posts,
   categoryLinks,
 }: {
-  initialContent: ContentData;
-  posts: ContentData[];
-  categoryLinks: ContentData[];
+  initialContent: ContentData
+  posts: ContentData[]
+  categoryLinks: ContentData[]
 }) {
-  const { content } = useLivePreview({ content: initialContent });
+  const { content } = useLivePreview({ content: initialContent })
 
   return (
-    <div className="mx-auto px-4 sm:px-6 md:px-28 py-9 md:py-16">
+    <div className="mx-auto px-4 py-9 sm:px-6 md:px-28 md:py-16">
       <div className="prose">
         <h1 className="text-4xl font-semibold md:text-5xl">
           {content.fields.title.text}
@@ -26,7 +26,7 @@ export default function BlogLandingPage({
           dangerouslySetInnerHTML={{ __html: content.fields.text.text }}
           className="text-lg"
         />
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-4 my-7">
+        <div className="my-7 flex flex-wrap items-center gap-x-3 gap-y-4">
           {categoryLinks.map((category, index) => (
             <CategoryPill key={`blog-category-${index}`} category={category} />
           ))}
@@ -38,5 +38,5 @@ export default function BlogLandingPage({
         ))}
       </div>
     </div>
-  );
+  )
 }

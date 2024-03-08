@@ -1,42 +1,48 @@
-import "@/styles/tailwind.css";
-import { createClient } from "@/lib/contento";
-import Header from "@/components/navigation/Header";
-import Footer from "@/components/navigation/Footer";
-import notFound from "./not-found";
-import { Inter } from "next/font/google";
+import '@/styles/tailwind.css'
+import { createClient } from '@/lib/contento'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import notFound from './not-found'
+import { Inter } from 'next/font/google'
 
 const InterFont = Inter({
-  variable: "--font-inter",
-  weight: ["400", "600", "900"],
-  style: ["normal"],
-  subsets: ["latin"],
-});
+  variable: '--font-inter',
+  weight: ['400', '600', '900'],
+  style: ['normal'],
+  subsets: ['latin'],
+})
 
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const mainNavId = process.env.SITE_MAIN_NAV_ID ?? false;
-  const footerNavId = process.env.SITE_FOOTER_NAV_ID ?? false;
+  const mainNavId = process.env.SITE_MAIN_NAV_ID ?? false
+  const footerNavId = process.env.SITE_FOOTER_NAV_ID ?? false
 
-  if (!mainNavId || !footerNavId) {
+  if (!mainNavId) {
     throw new Error(
-      "No mainNavId or footerNavId found, please ensure you have created a mainNav and footerNav entry in Contento CMS and copy their id's to your .env file"
-    );
+      'No main nav found. Please ensure you have created one in Contento and copied the ID to your .env file.',
+    )
+  }
+
+  if (!footerNavId) {
+    throw new Error(
+      'No footer nav found. Please ensure you have created one in Contento and copied the ID to your .env file.',
+    )
   }
 
   const mainNav = await createClient()
     .getContentById(mainNavId)
     .catch(() => {
-      notFound();
-    });
+      notFound()
+    })
 
   const footerNav = await createClient()
     .getContentById(footerNavId)
     .catch(() => {
-      notFound();
-    });
+      notFound()
+    })
 
   return (
     <html
@@ -45,12 +51,12 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex h-full">
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <Header mainNav={mainNav} />
           <main className="flex-auto">{children}</main>
           <Footer footerNav={footerNav} />
         </div>
       </body>
     </html>
-  );
+  )
 }

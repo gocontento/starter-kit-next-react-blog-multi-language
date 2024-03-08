@@ -1,5 +1,5 @@
-import { BlockData } from "@gocontento/client";
-import Image from "next/image";
+import { BlockData } from '@gocontento/client'
+import Image from 'next/image'
 
 export default function ImageBlock({ block }: { block: BlockData }) {
   return (
@@ -7,10 +7,10 @@ export default function ImageBlock({ block }: { block: BlockData }) {
       <Image
         src={block.fields.image.assets[0].asset.url}
         alt={block.fields.image.assets[0].asset.description}
-        className="h-full w-full object-cover prose mx-auto"
+        className="prose mx-auto h-full w-full object-cover"
         width={176}
         height={176}
       />
     </div>
-  );
+  )
 }

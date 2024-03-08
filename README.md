@@ -9,9 +9,11 @@ First, install all the required dependencies:
 ```bash
 npm install
 ```
+
 In your Contento Account Settings create a new API Key for this site.
 
 In your Contento CMS starter kit site, in the Content panel:
+
 - Add new Main Nav
 - Add new Footer Nav
 - Add new General Page and Hero Block
@@ -40,4 +42,3 @@ To learn more about Next.js, take a look at the following resources:
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-

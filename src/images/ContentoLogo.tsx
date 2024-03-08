@@ -50,5 +50,5 @@ export default function ContentoLogo({ className }: { className?: string }) {
         fill="#2B2B2A"
       />
     </svg>
-  );
+  )
 }
