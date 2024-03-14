@@ -7,7 +7,7 @@ import { Inter } from 'next/font/google'
 
 const InterFont = Inter({
   variable: '--font-inter',
-  weight: ['400', '600', '900'],
+  weight: ['400', '700', '900'],
   style: ['normal'],
   subsets: ['latin'],
 })
