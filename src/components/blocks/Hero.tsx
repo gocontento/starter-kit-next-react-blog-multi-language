@@ -14,22 +14,24 @@ export default function Hero({ block }: { block: BlockData }) {
             dangerouslySetInnerHTML={{ __html: block.fields.text.text }}
             className="text-lg"
           />
-          {block.fields.button.blocks.length > 0 &&
+          {block.fields.button.blocks &&
             block.fields.button.blocks.map((button: BlockData) => {
               return (
                 <Button key={button.fields.button_text.text} button={button} />
               )
             })}
         </div>
-        <div>
-          <Image
-            src={block.fields.image.assets[0].asset.url}
-            alt={block.fields.image.assets[0].asset.description}
-            className="h-full w-full object-cover"
-            width={750}
-            height={600}
-          />
-        </div>
+        {block.fields.image.assets && (
+          <div>
+            <Image
+              src={block.fields.image.assets[0].asset.url}
+              alt={block.fields.image.assets[0].asset.description}
+              className="h-full w-full object-cover"
+              width={750}
+              height={600}
+            />
+          </div>
+        )}
       </div>
     </div>
   )
