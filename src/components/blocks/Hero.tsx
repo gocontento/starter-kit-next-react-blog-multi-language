@@ -21,7 +21,7 @@ export default function Hero({ block }: { block: BlockData }) {
               )
             })}
         </div>
-        {block.fields.image.assets && (
+        {block.fields.image.assets.length > 0 && (
           <div>
             <Image
               src={block.fields.image.assets[0].asset.url}

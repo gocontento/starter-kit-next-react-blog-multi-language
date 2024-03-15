@@ -2,7 +2,7 @@ import { BlockData } from '@gocontento/client'
 import Image from 'next/image'
 
 export default function ImageBlock({ block }: { block: BlockData }) {
-  return (
+  return block.fields.image.assets.length > 0 ? (
     <div className="py-9 md:py-16">
       <Image
         src={block.fields.image.assets[0].asset.url}
@@ -12,5 +12,5 @@ export default function ImageBlock({ block }: { block: BlockData }) {
         height={176}
       />
     </div>
-  )
+  ) : null
 }
