@@ -1,4 +1,4 @@
-import '@/styles/tailwind.css'
+import './globals.css'
 import { createClient } from '@/lib/contento'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
