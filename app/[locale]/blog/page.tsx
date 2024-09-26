@@ -1,16 +1,30 @@
 import { draftMode } from 'next/headers'
-import {
-  createClient,
-  generateSeo,
-  getBlogCategoryLinks,
-  getBlogPosts,
-} from '@/lib/contento'
+import { createClient, generateSeo, getBlogCategoryLinks } from '@/lib/contento'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import BlogLandingPage from '@/components/pages/BlogLandingPage'
-import { ContentData } from '@gocontento/client'
+import { ContentAPIResponse, ContentData } from '@gocontento/client'
 
 const client = createClient()
+
+type Props = {
+  params: {
+    locale: string
+  }
+}
+
+export async function getBlogPosts({ params }: Props): Promise<ContentData[]> {
+  return await createClient(false, params.locale)
+    .getContentByType({
+      contentType: 'blog_post',
+    })
+    .then((response: ContentAPIResponse) => {
+      return response.content
+    })
+    .catch(() => {
+      return []
+    })
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   return await client
@@ -23,14 +37,14 @@ export async function generateMetadata(): Promise<Metadata> {
     })
 }
 
-export default async function page() {
-  const content = await createClient(draftMode().isEnabled)
+export default async function page({ params }: Props) {
+  const content = await createClient(draftMode().isEnabled, params.locale)
     .getContentBySlug('blog', 'blog_landing')
     .catch(() => {
       notFound()
     })
 
-  const posts = await getBlogPosts()
+  const posts = await getBlogPosts({ params })
 
   const categoryLinks = await getBlogCategoryLinks()
 

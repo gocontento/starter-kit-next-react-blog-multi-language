@@ -5,8 +5,9 @@ import ContentoLogo from '@/images/ContentoLogo'
 import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/16/solid'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { classNames } from '@/utils/ClassNames'
+import { ChangeEvent } from 'react'
 
 function Logo() {
   return (
@@ -19,7 +20,35 @@ function Logo() {
   )
 }
 
-export default function Header({ mainNav }: { mainNav: ContentData }) {
+function LanguageSelector({ locale }: { locale: string }) {
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newLocale = e.target.value as string
+    const path = pathname.split('/').slice(2).join('/')
+    router.push(`/${newLocale}/${path}`)
+  }
+
+  return (
+    <select
+      className="w-20 border-2"
+      value={locale}
+      onChange={handleLanguageChange}
+    >
+      <option value="en">EN</option>
+      <option value="fr">FR</option>
+    </select>
+  )
+}
+
+export default function Header({
+  mainNav,
+  locale,
+}: {
+  mainNav: ContentData
+  locale: string
+}) {
   const pathName = usePathname()
 
   return (
@@ -35,6 +64,7 @@ export default function Header({ mainNav }: { mainNav: ContentData }) {
               <div>
                 {/* Desktop Nav */}
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-9">
+                  <LanguageSelector locale={locale} />
                   {mainNav.fields.nav_links.blocks.map((item: BlockData) => {
                     if (item.fields.button.is_on) {
                       return (

@@ -9,6 +9,7 @@ const client = createClient()
 
 type Props = {
   params: {
+    locale: string
     slug: string
   }
 }
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function page({ params }: Props) {
-  const response = await createClient(draftMode().isEnabled)
+  const response = await createClient(draftMode().isEnabled, params.locale)
     .getContent({
       params: {
         content_type: ['general_page'],

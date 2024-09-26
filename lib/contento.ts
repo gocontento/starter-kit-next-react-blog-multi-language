@@ -1,14 +1,22 @@
-import { ContentAPIResponse, ContentData } from '@gocontento/client'
-import { Client } from '@gocontento/next'
+import { ContentAPIResponse, ContentData, createContentoClient } from '@gocontento/client'
 import { Metadata } from 'next'
 import { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 
-export function createClient(isPreview: boolean = false) {
-  return Client.createContentoClient({
+
+type Props = {
+  params: {
+    locale: string
+    slug: string
+  }
+}
+
+export function createClient(isPreview: boolean = false, language?: string) {
+  return createContentoClient({
     apiURL: process.env.CONTENTO_API_URL ?? '',
     apiKey: process.env.CONTENTO_API_KEY ?? '',
     siteId: process.env.CONTENTO_SITE_ID ?? '',
     isPreview: isPreview,
+    language: language
   })
 }
 
@@ -75,15 +83,15 @@ export async function getBlogCategoryLinks(): Promise<ContentData[]> {
     })
 }
 
-export async function getBlogPosts(): Promise<ContentData[]> {
-  return await createClient()
-    .getContentByType({
-      contentType: 'blog_post',
-    })
-    .then((response: ContentAPIResponse) => {
-      return response.content
-    })
-    .catch(() => {
-      return []
-    })
-}
+// export async function getBlogPosts({ params }: Props): Promise<ContentData[]> {
+//   return await createClient(false, params.locale)
+//     .getContentByType({
+//       contentType: 'blog_post',
+//     })
+//     .then((response: ContentAPIResponse) => {
+//       return response.content
+//     })
+//     .catch(() => {
+//       return []
+//     })
+// }
