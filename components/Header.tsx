@@ -5,9 +5,10 @@ import ContentoLogo from '@/images/ContentoLogo'
 import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/16/solid'
-import { usePathname, useRouter } from 'next/navigation'
 import { classNames } from '@/utils/ClassNames'
 import { ChangeEvent } from 'react'
+import { Locale, usePathname, useRouter } from '@/i18n/routing'
+import { useParams } from 'next/navigation'
 
 function Logo() {
   return (
@@ -23,11 +24,12 @@ function Logo() {
 function LanguageSelector({ locale }: { locale: string }) {
   const pathname = usePathname()
   const router = useRouter()
+  const params = useParams()
 
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newLocale = e.target.value as string
-    const path = pathname.split('/').slice(2).join('/')
-    router.push(`/${newLocale}/${path}`)
+    const newLocale = e.target.value as Locale
+
+    router.push(pathname, { locale: newLocale })
   }
 
   return (

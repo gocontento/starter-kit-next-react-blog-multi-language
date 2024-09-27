@@ -9,6 +9,7 @@ const client = createClient()
 
 type Props = {
   params: {
+    locale: string
     slug: string
   }
 }
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function page({ params }: Props) {
-  const post = await createClient(draftMode().isEnabled)
+  const post = await createClient(draftMode().isEnabled, params.locale)
     .getContentBySlug(params.slug, 'blog_post')
     .catch(() => {
       notFound()

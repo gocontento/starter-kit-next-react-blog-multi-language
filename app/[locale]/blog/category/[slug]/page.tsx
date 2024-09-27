@@ -9,6 +9,7 @@ const client = createClient()
 
 type Props = {
   params: {
+    locale: string
     slug: string
   }
 }
@@ -41,13 +42,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function page({ params }: Props) {
-  const content = await createClient(draftMode().isEnabled)
+  const content = await createClient(draftMode().isEnabled, params.locale)
     .getContentBySlug(params.slug, 'blog_category')
     .catch(() => {
       notFound()
     })
 
-  const postsResponse = await client.getContent({
+  const postsResponse = await createClient(
+    draftMode().isEnabled,
+    params.locale,
+  ).getContent({
     params: {
       content_type: 'blog_post',
       limit: '100',
@@ -57,7 +61,7 @@ export default async function page({ params }: Props) {
 
   const posts = postsResponse.content
 
-  const categoryLinks = await getBlogCategoryLinks()
+  const categoryLinks = await getBlogCategoryLinks(params.locale)
 
   return (
     <BlogCategoryPage

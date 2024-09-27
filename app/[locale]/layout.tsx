@@ -24,6 +24,8 @@ export default async function RootLayout({
   const messages = await getMessages()
   const client = createClient(false, locale)
 
+  // Request by id but pass in language. getContentById()
+
   const mainNavResponse = await client.getContentByType({
     contentType: 'navigation',
     limit: 1,

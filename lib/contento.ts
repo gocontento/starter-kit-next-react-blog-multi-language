@@ -67,8 +67,8 @@ export function generateSeo(
   }
 }
 
-export async function getBlogCategoryLinks(): Promise<ContentData[]> {
-  return await createClient()
+export async function getBlogCategoryLinks(language?:string): Promise<ContentData[]> {
+  return await createClient(false, language)
     .getContentByType({
       contentType: 'blog_category',
       sortBy: 'name',
@@ -83,15 +83,15 @@ export async function getBlogCategoryLinks(): Promise<ContentData[]> {
     })
 }
 
-// export async function getBlogPosts({ params }: Props): Promise<ContentData[]> {
-//   return await createClient(false, params.locale)
-//     .getContentByType({
-//       contentType: 'blog_post',
-//     })
-//     .then((response: ContentAPIResponse) => {
-//       return response.content
-//     })
-//     .catch(() => {
-//       return []
-//     })
-// }
+export async function getBlogPosts(language?:string): Promise<ContentData[]> {
+  return await createClient(false, language)
+    .getContentByType({
+      contentType: 'blog_post',
+    })
+    .then((response: ContentAPIResponse) => {
+      return response.content
+    })
+    .catch(() => {
+      return []
+    })
+}

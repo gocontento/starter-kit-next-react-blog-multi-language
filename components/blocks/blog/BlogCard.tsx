@@ -3,10 +3,12 @@ import Image from 'next/image'
 import { ContentData } from '@gocontento/client'
 import { formatDate } from '@/utils/formatDate'
 import nl2br from 'react-nl2br'
+import { useTranslations } from 'next-intl'
 
 export default function BlogCard({ post }: { post: ContentData }) {
   const category = post.fields.category.content_links[0].content_link
   const author = post.fields.author.content_links[0].content_link
+  const t = useTranslations('Blog')
 
   return (
     <div className="prose">
@@ -45,7 +47,7 @@ export default function BlogCard({ post }: { post: ContentData }) {
           href={`/${post.uri}`}
           className="not-prose my-5 inline-block font-semibold text-black hover:opacity-80 hover:opacity-80"
         >
-          Read More
+          {t('cta')}
         </Link>
       </div>
     </div>
