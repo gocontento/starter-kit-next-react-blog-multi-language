@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import BlogCategoryPage from '@/components/pages/BlogCategoryPage'
 import { ContentAPIResponse, ContentData } from '@gocontento/client'
 import { routing } from '@/i18n/routing'
+import { unstable_setRequestLocale } from 'next-intl/server'
 
 const client = createClient()
 
@@ -56,6 +57,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function page({ params }: Props) {
+  unstable_setRequestLocale(params.locale)
+
   const content = await createClient(draftMode().isEnabled, params.locale)
     .getContentBySlug(params.slug, 'blog_category')
     .catch(() => {
