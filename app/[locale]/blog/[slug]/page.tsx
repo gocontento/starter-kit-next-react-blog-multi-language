@@ -46,7 +46,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  return await client
+  return await createClient(false, params.locale)
     .getContentBySlug(params.slug, 'blog_post')
     .then((content: ContentData) => {
       return generateSeo(content, {

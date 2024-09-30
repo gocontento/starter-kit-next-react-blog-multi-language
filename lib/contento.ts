@@ -2,14 +2,6 @@ import { ContentAPIResponse, ContentData, createContentoClient } from '@goconten
 import { Metadata } from 'next'
 import { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 
-
-type Props = {
-  params: {
-    locale: string
-    slug: string
-  }
-}
-
 export function createClient(isPreview: boolean = false, language?: string) {
   return createContentoClient({
     apiURL: process.env.CONTENTO_API_URL ?? '',
