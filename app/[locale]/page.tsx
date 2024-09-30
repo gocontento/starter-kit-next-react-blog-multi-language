@@ -2,7 +2,6 @@ import { createClient } from '@/lib/contento'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import GeneralPage from '@/components/pages/GeneralPage'
-import { unstable_setRequestLocale } from 'next-intl/server'
 
 type Props = {
   params: {
