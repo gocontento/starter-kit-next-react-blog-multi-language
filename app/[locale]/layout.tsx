@@ -22,22 +22,32 @@ export default async function RootLayout({
   params: { locale: string }
 }) {
   const messages = await getMessages()
-  const client = createClient(false, locale)
+  const mainNavId = process.env.SITE_MAIN_NAV_ID ?? false
+  const footerNavId = process.env.SITE_FOOTER_NAV_ID ?? false
 
-  // Request by id but pass in language. getContentById()
+  if (!mainNavId) {
+    throw new Error(
+      'No main nav found. Please ensure you have created one in Contento and copied the ID to your .env file.',
+    )
+  }
 
-  const mainNavResponse = await client.getContentByType({
-    contentType: 'navigation',
-    limit: 1,
-  })
+  if (!footerNavId) {
+    throw new Error(
+      'No footer nav found. Please ensure you have created one in Contento and copied the ID to your .env file.',
+    )
+  }
 
-  const footerNavResponse = await client.getContentByType({
-    contentType: 'navigation',
-    limit: 1,
-  })
+  const mainNav = await createClient()
+    .getContentById(mainNavId)
+    .catch(() => {
+      notFound()
+    })
 
-  const mainNav = mainNavResponse.content[0]
-  const footerNav = footerNavResponse.content[0]
+  const footerNav = await createClient()
+    .getContentById(footerNavId)
+    .catch(() => {
+      notFound()
+    })
 
   return (
     <html

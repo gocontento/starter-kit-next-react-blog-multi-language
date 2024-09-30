@@ -3,7 +3,8 @@ import { createClient, generateSeo } from '@/lib/contento'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import GeneralPage from '@/components/pages/GeneralPage'
-import { ContentAPIResponse } from '@gocontento/client'
+import { ContentAPIResponse, ContentData } from '@gocontento/client'
+import { routing } from '@/i18n/routing'
 
 const client = createClient()
 
@@ -12,6 +13,11 @@ type Props = {
     locale: string
     slug: string
   }
+}
+
+type LocaleContent = {
+  slug: string | null
+  locale: string
 }
 
 export async function generateStaticParams() {
@@ -23,11 +29,17 @@ export async function generateStaticParams() {
       },
     })
     .then((response: ContentAPIResponse) => {
-      return response.content
-        .map((content) => ({
-          slug: content.slug,
-        }))
-        .filter((o) => o.slug !== 'home')
+      const localeArray = [] as LocaleContent[]
+
+      response.content.forEach((content: ContentData) => {
+        routing.locales.forEach((locale) => {
+          localeArray.push({
+            slug: content.slug,
+            locale: locale,
+          })
+        })
+      })
+      return localeArray
     })
     .catch(() => {
       return []

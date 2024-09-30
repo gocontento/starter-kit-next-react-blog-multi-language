@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { ContentAPIResponse, ContentData } from '@gocontento/client'
 import BlogAuthorPage from '@/components/pages/BlogAuthorPage'
+import { routing } from '@/i18n/routing'
 
 const client = createClient()
 
@@ -14,6 +15,11 @@ type Props = {
   }
 }
 
+type LocaleContent = {
+  slug: string | null
+  locale: string
+}
+
 export async function generateStaticParams() {
   return await client
     .getContentByType({
@@ -21,9 +27,17 @@ export async function generateStaticParams() {
       limit: 100,
     })
     .then((response: ContentAPIResponse) => {
-      return response.content.map((content) => ({
-        slug: content.slug,
-      }))
+      const localeArray = [] as LocaleContent[]
+
+      response.content.forEach((content: ContentData) => {
+        routing.locales.forEach((locale) => {
+          localeArray.push({
+            slug: content.slug,
+            locale: locale,
+          })
+        })
+      })
+      return localeArray
     })
     .catch(() => {
       return []
