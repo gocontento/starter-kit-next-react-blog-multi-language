@@ -3,17 +3,18 @@ import Image from 'next/image'
 import Button from './Button'
 
 export default function ImageAndText({ block }: { block: BlockData }) {
-  const image = block.fields.image.assets.length > 0 ? (
-    <div>
-      <Image
-        src={block.fields.image.assets[0].asset.url}
-        alt={block.fields.image.assets[0].asset.description}
-        className="h-full w-full object-cover"
-        width={176}
-        height={176}
-      />
-    </div>
-  ) : null
+  const image =
+    block.fields.image.assets.length > 0 ? (
+      <div>
+        <Image
+          src={block.fields.image.assets[0].asset.url}
+          alt={block.fields.image.assets[0].asset.description}
+          className="h-full w-full object-cover"
+          width={176}
+          height={176}
+        />
+      </div>
+    ) : null
   return (
     <div className="py-9 md:py-16">
       <div className="grid items-center space-y-6 md:grid-cols-2 md:space-x-12">
