@@ -1,10 +1,13 @@
 ## Welcome to the Blog Starter Kit with Multi-Language for Contento
 
 This multi-language starter kit has a page builder template, header and footer navs, a basic collection of composable content blocks
-and all you need for a blog plus the technical set up for multi-language content and routing using [Next-Intl](https://next-intl-docs.vercel.app/docs/getting-started). It’s designed to get you started using Contento for multi-language websites, and is built with a familiar and popular
+and all you need for a blog. Plus, the technical set up for multi-language content and routing using [Next-Intl](https://next-intl-docs.vercel.app/docs/getting-started).
+
+It’s designed to get you started using Contento for multi-language websites, and is built with a familiar and popular
 tech stack ([Next.js](https://nextjs.org) & [Tailwind CSS](https://tailwindcss.com)).
 
-There are examples of both dynamic multi-language content coming from Contento and static multi-lanuage content coming from locale dictionaries in the `messages` folder, which is ideal for content that is hard-coded and not editable in Contento.
+There are examples of both dynamic multi-language content coming from Contento and static multi-lanuage content coming
+from locale dictionaries in the `messages` folder, which is ideal for content that is hard-coded and not editable in Contento.
 
 ## Getting Started
 
