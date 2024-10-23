@@ -5,7 +5,6 @@ export const formatDate = (dateString: string | undefined | null): string => {
       day: 'numeric',
       month: 'numeric',
       year: 'numeric',
-      
     }
     return new Intl.DateTimeFormat('en-GB', options).format(date)
   } else {

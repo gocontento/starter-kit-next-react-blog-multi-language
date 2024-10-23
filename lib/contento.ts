@@ -1,4 +1,8 @@
-import { ContentAPIResponse, ContentData, createContentoClient } from '@gocontento/client'
+import {
+  ContentAPIResponse,
+  ContentData,
+  createContentoClient,
+} from '@gocontento/client'
 import { Metadata } from 'next'
 import { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 
@@ -8,7 +12,7 @@ export function createClient(isPreview: boolean = false, language?: string) {
     apiKey: process.env.CONTENTO_API_KEY ?? '',
     siteId: process.env.CONTENTO_SITE_ID ?? '',
     isPreview: isPreview,
-    language: language
+    language: language,
   })
 }
 
@@ -59,7 +63,9 @@ export function generateSeo(
   }
 }
 
-export async function getBlogCategoryLinks(language?:string): Promise<ContentData[]> {
+export async function getBlogCategoryLinks(
+  language?: string,
+): Promise<ContentData[]> {
   return await createClient(false, language)
     .getContentByType({
       contentType: 'blog_category',
@@ -75,7 +81,7 @@ export async function getBlogCategoryLinks(language?:string): Promise<ContentDat
     })
 }
 
-export async function getBlogPosts(language?:string): Promise<ContentData[]> {
+export async function getBlogPosts(language?: string): Promise<ContentData[]> {
   return await createClient(false, language)
     .getContentByType({
       contentType: 'blog_post',
