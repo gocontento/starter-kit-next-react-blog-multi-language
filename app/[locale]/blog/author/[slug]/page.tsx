@@ -5,7 +5,7 @@ import { Metadata } from 'next'
 import { ContentAPIResponse, ContentData } from '@gocontento/client'
 import BlogAuthorPage from '@/components/pages/BlogAuthorPage'
 import { routing } from '@/i18n/routing'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 
 const client = createClient()
 
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function page({ params }: Props) {
-  unstable_setRequestLocale(params.locale)
+  setRequestLocale(params.locale)
 
   const content = await createClient(draftMode().isEnabled, params.locale)
     .getContentBySlug(params.slug, 'authors')

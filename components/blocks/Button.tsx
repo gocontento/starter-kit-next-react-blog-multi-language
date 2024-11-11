@@ -1,5 +1,5 @@
 import { BlockData } from '@gocontento/client'
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 
 export default function Button({ button }: { button: BlockData }) {
   return (

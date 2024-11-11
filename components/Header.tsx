@@ -2,13 +2,11 @@
 
 import { BlockData, ContentData } from '@gocontento/client'
 import ContentoLogo from '@/images/ContentoLogo'
-import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/16/solid'
 import { classNames } from '@/utils/ClassNames'
 import { ChangeEvent } from 'react'
-import { Locale, usePathname, useRouter } from '@/i18n/routing'
-import { useParams } from 'next/navigation'
+import { Locale, usePathname, useRouter, Link } from '@/i18n/routing'
 
 function Logo() {
   return (
@@ -24,7 +22,6 @@ function Logo() {
 function LanguageSelector({ locale }: { locale: string }) {
   const pathname = usePathname()
   const router = useRouter()
-  const params = useParams()
 
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newLocale = e.target.value as Locale

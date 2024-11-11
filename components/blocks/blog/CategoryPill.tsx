@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/i18n/routing'
 import { ContentData } from '@gocontento/client'
 
 export default function CategoryPill({ category }: { category: ContentData }) {

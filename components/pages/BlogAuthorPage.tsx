@@ -3,7 +3,6 @@
 import { useLivePreview } from '@gocontento/next'
 import { ContentData } from '@gocontento/client/lib/types'
 import BlogCard from '../blocks/blog/BlogCard'
-import CategoryPill from '../blocks/blog/CategoryPill'
 import Image from 'next/image'
 import TwitterIcon from '../icons/TwitterIcon'
 import LinkedInIcon from '../icons/LinkedInIcon'

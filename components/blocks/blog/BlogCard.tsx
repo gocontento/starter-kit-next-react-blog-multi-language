@@ -29,14 +29,14 @@ export default function BlogCard({ post }: { post: ContentData }) {
         <div className="flex items-center space-x-2">
           <Link
             className="text-sm font-semibold no-underline hover:opacity-80"
-            href={`/blog/author/${author.slug}`}
+            href={`/${author.uri}`}
           >
             {author.fields.name.text}
           </Link>
           <span>|</span>
           <Link
             className="text-sm font-semibold no-underline hover:opacity-80"
-            href={`/blog/category/${category.slug}`}
+            href={`/${category.uri}`}
           >
             {category.fields.title.text}
           </Link>

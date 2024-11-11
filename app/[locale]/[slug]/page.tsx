@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import GeneralPage from '@/components/pages/GeneralPage'
 import { ContentAPIResponse, ContentData } from '@gocontento/client'
 import { routing } from '@/i18n/routing'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 
 const client = createClient()
 
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function page({ params }: Props) {
-  unstable_setRequestLocale(params.locale)
+  setRequestLocale(params.locale)
 
   const response = await createClient(draftMode().isEnabled, params.locale)
     .getContent({
