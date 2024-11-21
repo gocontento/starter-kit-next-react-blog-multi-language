@@ -28,7 +28,7 @@ export default function BlogAuthor({
           height={80}
           className="rounded-full object-cover"
         />
-        <h1 className="my-5 text-4xl font-semibold md:text-5xl">
+        <h1 className="my-5 text-4xl font-semibold tracking-tight md:text-5xl">
           {content.fields.name.text}
         </h1>
         <p className="mb-1 text-lg font-semibold">{content.fields.role.text}</p>

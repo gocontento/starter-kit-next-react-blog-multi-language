@@ -23,7 +23,7 @@ export default function BlogCard({ post }: { post: ContentData }) {
       </div>
       <div>
         <p className="text-sm">{formatDate(post.published_at)}</p>
-        <h3 className="mb-5 mt-0 text-4xl font-semibold">
+        <h3 className="mb-5 mt-0 text-4xl font-semibold tracking-tight">
           {post.fields.title.text}
         </h3>
         <div className="flex items-center space-x-2">

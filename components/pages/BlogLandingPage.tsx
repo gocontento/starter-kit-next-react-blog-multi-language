@@ -19,7 +19,7 @@ export default function BlogLandingPage({
   return (
     <div className="mx-auto px-4 py-9 sm:px-6 md:px-28 md:py-16">
       <div className="prose">
-        <h1 className="text-4xl font-semibold md:text-5xl">
+        <h1 className="text-4xl tracking-tight font-semibold md:text-5xl">
           {content.fields.title.text}
         </h1>
         <div

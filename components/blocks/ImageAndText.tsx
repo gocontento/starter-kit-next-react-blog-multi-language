@@ -22,7 +22,7 @@ export default function ImageAndText({ block }: { block: BlockData }) {
           <>{image}</>
         )}
         <div className="prose">
-          <h2 className="text-3xl font-semibold">{block.fields.title.text}</h2>
+          <h2 className="text-3xl tracking-tight font-semibold">{block.fields.title.text}</h2>
           <div
             dangerouslySetInnerHTML={{ __html: block.fields.text.text }}
             className="text-lg"
