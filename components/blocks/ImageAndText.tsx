@@ -17,7 +17,7 @@ export default function ImageAndText({ block }: { block: BlockData }) {
     ) : null
   return (
     <div className="py-9 md:py-16">
-      <div className="grid items-center space-y-6 md:grid-cols-2 md:space-x-12">
+      <div className="grid items-center space-y-9 lg:grid-cols-2 lg:space-x-12">
         {block.fields.image_side.selected_option.value === 'left' && (
           <>{image}</>
         )}
