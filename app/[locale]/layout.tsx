@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
+import AnnouncementBar from '@/components/blocks/AnnouncementBar'
 
 const InterFont = Inter({
   variable: '--font-inter',
@@ -52,6 +53,10 @@ export default async function RootLayout({
       )
     })
 
+  const announcementBar = await createClient().getContentByType({
+    contentType: 'announcement_bar',
+  })
+
   return (
     <html
       lang={locale}
@@ -61,6 +66,9 @@ export default async function RootLayout({
       <body className="flex h-full">
         <NextIntlClientProvider messages={messages}>
           <div className="flex w-full flex-col">
+            {announcementBar && (
+              <AnnouncementBar block={announcementBar.content[0]} />
+            )}
             <Header locale={locale} mainNav={mainNav} />
             <main className="flex-auto">{children}</main>
             <Footer footerNav={footerNav} />
