@@ -97,7 +97,8 @@ export default function Header({
                 </div>
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="relative inline-flex items-center justify-center text-zinc-600">
+                  <LanguageSelector locale={locale} />
+                  <Disclosure.Button className="relative ml-4 inline-flex items-center justify-center text-zinc-600">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
                     {open ? (
